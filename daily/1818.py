@@ -20,13 +20,13 @@ class Solution:
     def minAbsoluteSumDiff(self, nums1: List[int], nums2: List[int]) -> int:
         num_l = sorted(nums1)
         sum_s = 0 
+        max_trans = 0
         for i in range(len(nums1)):
             sum_s += abs(nums1[i]-nums2[i])
             sum_s %= (10**9+7)
-        max_trans = 0
-        for i in range(len(nums1)):
+
             diff = abs(nums1[i] - nums2[i])
-            if diff == 0:
+            if diff <= max_trans:
                 continue
             trans = self.choose_num(num_l, nums2[i])
             temp = diff-trans
