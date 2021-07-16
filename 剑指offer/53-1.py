@@ -37,7 +37,7 @@ class Solution:
             elif nums[mid]< target:
                 l = mid+1
         i = r
-        if r >= 0 and nums[l] != target: return 0
+        if l <= n-1 and nums[l] != target: return 0
         r, l = n-1, i
         while r>=l:
             mid = int((r+l)/2)
@@ -49,5 +49,6 @@ class Solution:
         
         return j - i - 1
 
-result = Solution().search([1], 1)
+result = Solution().search([2,2],
+3)
 print(result)
