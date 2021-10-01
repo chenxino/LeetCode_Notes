@@ -1,7 +1,11 @@
 class Solution:
     def movingCount(self, m: int, n: int, k: int) -> int:
         matrix = [[0]*n for i in range(m)]
-
+        def get_digit_sum(x):
+            s_sum = 0
+            while x>0:
+                s_sum += x % 10
+                x = int(x/10)
         def count_sum(x, y):
             ss = str(x)+str(y)
             s_sum = 0
@@ -9,10 +13,10 @@ class Solution:
                 s_sum += int(i)
             return s_sum
         def dfs(x, y, l):
-            if not 0 <= x < m or not 0 <= y < n:
+            if not 0 <= x < m or not 0 <= y < n or matrix[x][y] == 1 or count_sum(x, y) > k :
                 return l
-            if matrix[x][y] == 1 or count_sum(x, y) > k:
-                return l
+            # if matrix[x][y] == 1 or count_sum(x, y) > k:
+            #     return l
             matrix[x][y] = 1
             l += 1
             l = dfs(x, y+1, l)
