@@ -1,0 +1,25 @@
+class Solution:
+    def permutation(self, s: str) -> List[str]:
+        flag_s = [True]*len(s)
+        print(flag_s)
+        
+        now_s = ''
+        results = []
+        def next_num(now_s, flag_s):
+            print(flag_s)
+            for i in range(len(s)):
+                if flag_s[i] == True:
+                    flag_s[i] = False
+                    
+                    now_s += s[i]
+                    if len(now_s) == len(s):
+                        if now_s not in results:
+                            results.append((now_s))
+                    else:
+                        next_num(now_s, flag_s)
+                    flag_s[i] = True
+                    now_s = now_s[:-1]
+        next_num(now_s, flag_s)
+        return results
+
+
