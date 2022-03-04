@@ -55,4 +55,32 @@ def recoverTree(root):
             x.val, y.val = y.val, x.val
 
             
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def __init__(self):
+        self.pre = TreeNode(float('-inf'))
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        self.s = None
+        def myrecover(node):
+            if node.left:
+                myrecover(node.left)
+            if self.pre.val > node.val:
+                self.s = self.pre if (self.s==None) else self.s
+                self.t = node
+            self.pre = node
+            if node.right:
+                myrecover(node.right)
+            return node
+        if root:
+            myrecover(root)
+            self.s.val, self.t.val = self.t.val, self.s.val
+        return root
 

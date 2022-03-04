@@ -21,3 +21,20 @@ class Solution:
             pre_root.right = mybuildTree(pre_left+size_left_tree+1, pre_right, in_root_index+1, in_right)
             return pre_root
         return mybuildTree(0,len(preorder)-1, 0, len(preorder)-1)
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        def myBuild(pre, ino):
+            if not pre:
+                return None
+            root = TreeNode(pre[0])
+            left_len = 0
+            for i in range(len(ino)):
+                if ino[i] == pre[0]:
+                    break
+                left_len += 1
+
+            root.left = myBuild(pre[1:left_len+1], ino[:left_len])
+            root.right = myBuild(pre[left_len+1:], ino[left_len+1:])
+            return root
+        return myBuild(preorder, inorder)
